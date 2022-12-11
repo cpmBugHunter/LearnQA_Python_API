@@ -11,5 +11,5 @@ try:
 except JSONDecodeError:
     print("$\'json_text\' is not a JSON")
 except Exception as e:
-    print(str(e))
+    print("Something went wrong. Google it using text below: " + str(e))
 
