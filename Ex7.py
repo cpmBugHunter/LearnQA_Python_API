@@ -22,6 +22,19 @@ for qt in query_types:
             resp = requests.request(qt, url)
 
         method_type_response = dict(method=qt, parameter=param, response=resp.text)
-        print(method_type_response)
         responses.append(method_type_response)
 
+incorrect_responses = []
+for r in responses:
+    method = r["method"]
+    parameter = r["parameter"]
+    response = r["response"]
+    if method == parameter:
+        if not response.lower().__contains__("success"):
+            incorrect_responses.append(r)
+    else:
+        if response.lower().__contains__("success"):
+            incorrect_responses.append(r)
+
+for u in incorrect_responses:
+    print(u)
