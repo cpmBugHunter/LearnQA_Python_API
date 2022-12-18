@@ -17,11 +17,12 @@ for qt in query_types:
             param = p
             payloads = {"method": param}
             resp = requests.request(qt, url, data=payloads)
-        elif qt in ("DELETE", "HEAD", "CONNECT", "OPTIONS", "TRACE"):
+        else:
             param = f"{p} was not sent"
             resp = requests.request(qt, url)
 
         method_type_response = dict(method=qt, parameter=param, response=resp.text)
+        print(method_type_response)
         responses.append(method_type_response)
 
 incorrect_responses = []
@@ -35,6 +36,6 @@ for r in responses:
     else:
         if response.lower().__contains__("success"):
             incorrect_responses.append(r)
-
+print("\n Incorrect responses are: \n")
 for u in incorrect_responses:
     print(u)
